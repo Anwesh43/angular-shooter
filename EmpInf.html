@@ -1,0 +1,25 @@
+<script src="../angular.min.js">
+</script>
+<script>
+	var app = angular.module('iscoApp',[]);
+	var isController = app.controller('iscoController',function($scope){
+		$scope.anwesh = {name:'Anwesh',age:22};
+		$scope.binay = {name:'Binay',age:55};
+ 	});
+	app.directive('empdir',function(){
+		var dir = {};
+		dir.scope = {empInfo:'=info'};
+		dir.templateUrl='empInformation.html';
+		dir.restrict = 'AE';
+		dir.replace = true;
+		return dir;
+	})
+</script>
+<div ng-app="iscoApp">
+	<div ng-controller="iscoController">
+		<empdir info="anwesh">
+		</empdir>
+		<empdir info="binay">
+		</empdir>
+	</div>
+</div>

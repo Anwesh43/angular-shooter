@@ -1,0 +1,36 @@
+<html>
+<head>
+<script src="https://cdn.firebase.com/js/client/2.2.1/firebase.js"></script>
+</head>
+<body>
+<div id="disper">
+	<input type="text" id="user" name="username">
+	<input type="age" id="age" name="age">
+	<input type="button" id="clicker" value="push"></input>
+</div>
+</div id="piper">
+</div>
+<script>
+	var dataRef = new FireBase('https://foizkw9otqw.firebaseio-demo.com/');
+	var user = document.getElementById('user');
+	var age = document.getElementById('age');
+	var i = 0;
+	var clicker = document.getElementById('clicker');
+	
+	dataRef.on('child_added',function(message){
+	document.getElementById('piper').innerHTML = 'Hello my name is '+message.name+' and age is '+message.age;
+	clicker.onclick = function(event) {
+		if(sessionStorage.counter) {
+			dataRef.push({name:user.value,age:age.value});
+
+		}
+		else {
+			sessionStorage.counter = 0;
+			dataRef.set({name:user.value,age:age.value});
+		}
+	};	
+	
+</script>
+
+</body>
+</html>

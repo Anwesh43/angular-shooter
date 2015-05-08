@@ -1,0 +1,45 @@
+<head>
+	<script src="./bower_components/angular/angular.min.js"></script>
+	<script src="./bower_components/ngDialog/js/ngDialog.js"></script>
+	<link href="./bower_components/ngDialog/css/ngDialog.css" rel="stylesheet">
+	<link href="./bower_components/ngDialog/css/ngDialog-theme-default.css" rel="stylesheet">
+	<link href="./bower_components/ngDialog/css/ngDialog-theme-plain.css" rel="stylesheet">
+	<script>
+	var dialogApp = angular.module('dialogApp',['ngDialog']);
+	var dialogController = dialogApp.controller('dialogController',function($scope){
+		$scope.username = "anwsh@aa.com";
+		$scope.password = "@nweshc00l1";
+		$scope.userlabel = "UserName:";
+		$scope.passlabel = "Password:";
+		$scope.userModel = "";
+		$scope.passModel = "";
+		$scope.checkUserPass = function() {
+			alert($scope.userModel+" "+$scope.passModel);
+			if($scope.userModel == $scope.username && $scope.passModel == $scope.password) {
+				
+				return true;
+			}
+			else {
+				alert('wrong vals');
+			}
+			return false;
+		};
+	});
+	var mainController = dialogApp.controller('mainController',function($scope,ngDialog){
+		
+		$scope.openDialog = function() {
+			ngDialog.open({
+				controller:'dialogController',
+				template:'modalTemplate.html',
+				className:'ngdialog-theme-default'
+			});			
+		};		
+	});
+</script>
+</head>
+
+<div ng-app="dialogApp" ng-controller="mainController">
+	<button id="d1"  ng-click="openDialog()">
+		<img src="show-icon.png">
+	</button>
+</div>

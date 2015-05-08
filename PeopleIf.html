@@ -1,0 +1,22 @@
+<script src="../angular.min.js">
+</script>
+<script>
+	var app = angular.module('myApp',[]);
+	var controller = app.controller('peopleController',function($scope){
+		$scope.peoples = [{name:'Ans',age:22},{name:'Bns',age:23},{name:'Tes',age:24},{name:'Cns',age:21},{name:'Aps',age:27}];
+	});
+</script>
+<div ng-app="myApp" ng-controller="peopleController">
+	<h1>Peoples 3</h1>
+	<div ng-repeat="people in peoples">
+		<p ng-if="people.age%3==0">{{people.name}}</p>
+	</div>
+	<h1>Peoples n</h1>
+	<div ng-repeat="people in peoples">
+		<p ng-if="people.name.charAt(1)=='n'">{{people.name}}</p>
+	</div>
+	<h1>Peoples A</h1>
+	<div ng-repeat="people in peoples">
+		<p ng-if="people.name.charAt(0)=='A'">{{people.name}}</p>
+	</div>
+</div>

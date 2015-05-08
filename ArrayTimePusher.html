@@ -1,0 +1,21 @@
+<script src = "../angular.min.js">
+</script>
+<script>
+	var app = angular.module('timeApp',[]);
+	var controller = app.controller('timeController',function($scope,$interval){
+		$scope.arrs = [];
+		var index = 0;
+		var interval = $interval(function(){
+			$scope.arrs.push(index);			
+			index++;
+		},1000);
+
+	});
+</script>
+<div ng-app="timeApp">
+	<div ng-controller="timeController">
+		<div ng-repeat = "arr in arrs">
+			{{arr}}
+		</div>
+	</div>
+</div>

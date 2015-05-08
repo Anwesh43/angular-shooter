@@ -1,0 +1,18 @@
+<script src="../angular.min.js"></script>
+<script>
+	var app = angular.module('myApp',[]);
+	var babyController = app.controller('babyController',function($scope,$parse){
+		$scope.name = 'Anwesh';
+		$scope.age = 22;
+		$scope.user ={name:"Bryan",age:32};
+		console.log($scope.$eval('"name is "+name+"age is "+age'));
+		var template = $parse('user.name');
+		$scope.user.name = template({user:{name:"Mangala"}});
+	});
+</script>
+<div ng-app="myApp">
+	<div ng-controller="babyController">
+		{{name}} is {{age}}
+		{{user.name}}
+	</div>
+</div>

@@ -1,0 +1,19 @@
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.10/angular.min.js"></script>
+<script>
+	var app = angular.module('appMod',[]);
+	var controller = app.controller('myController',function($scope){
+		$scope.user = {};
+	});
+</script>
+<div ng-app = "appMod">
+	<div ng-controller = "myController">
+		<form name="myForm" novalidate>
+			<input type="number" ng-model="number" name="myNum" required>
+			<div ng-show="myForm.$submitted" style="color:red"><span ng-show="myForm.myNum.$error.required">This is Required</span><span ng-show="myForm.myNum.$error.number">Need a number</span></div>
+			<input type="text" name="myAge">
+			<input type="submit">
+		</form>		
+			<input type="text" ng-model="user.name" ng-model-options="{updateOn:'blur'}">
+			{{user.name}}				
+	</div>
+</div>

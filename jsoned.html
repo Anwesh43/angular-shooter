@@ -1,0 +1,13 @@
+<html>
+<script>
+	window.onload = function(){
+
+	var div = document.createElement('div');
+	var data = JSON.stringify({name:'Anwesh',age:22,id:1});
+	var jsonData = JSON.parse(data);
+	div.innerHTML = "name:"+jsonData.name+" age:"+jsonData.age;
+	document.body.appendChild(div);		
+	};
+		
+</script>
+</html>

@@ -1,0 +1,11 @@
+<script src="../angular.min.js">
+</script>
+<script src="FilterVarApp.js">
+</script>
+<div ng-app="FiltVarApp" ng-controller="JoinerController">
+	<div>
+		<input type="text" ng-model="name" ng-blur="itemAppender(name)">
+		<input type="text" ng-model="symbol">
+		{{items|joiner:symbol}}
+	</div>
+</div>

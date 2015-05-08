@@ -1,0 +1,22 @@
+<script src="../angular.min.js">
+</script>
+<script>
+	var app = angular.module('myColorApp',[]);
+	app.filter('getRadius',function(){
+		return function(item) {
+			return item%2 == 0?'20%':'50%';	
+		};
+	});
+	var colorController = app.controller('colorController',function($scope){
+		$scope.shapes = [{color:'red',id:1},{color:'green',id:2},{color:'yellowgreen',id:3},{color:'violet',id:4},{color:'orange',id:5}];
+	});
+</script>
+<div ng-app = "myColorApp">
+	<div ng-controller="colorController">
+		<div ng-repeat = "shape in shapes">
+			<div style="background-color:{{shape.color}};border:1px solid black;border-radius:{{shape.id|getRadius}};width:100px;height:100px;text-align:center;font-size:63px;">
+				{{shape.id}}
+			</div>
+		</div>
+	</div>
+</div>

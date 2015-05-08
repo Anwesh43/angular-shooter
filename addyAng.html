@@ -1,0 +1,40 @@
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.10/angular.min.js"></script>
+<script>
+	var app = angular.module('myApp',[]);
+	var controller = app.controller('myController',function($scope){
+		$scope.names = ['aka','baka','maka','taka'];
+	});
+	app.directive('adderPart',function() {
+		var direc = {restrict:'AE',replace:true,link:function(scope,elem,attrs){
+			scope.ages = [10,20,18,17,16];
+			console.log(attrs.afterFive);
+			scope.ages.push(attrs.afterFive);
+			scope.ages.push(attrs.afterSix);
+		},template:"<div ng-repeat='age in ages'>{{age}}</div>"};
+		return direc;
+	});
+	app.directive('checker',function(){
+		var direc = {link:function(scope,elem,attrs){
+
+			elem.css('color','red');
+			elem.bind('keyup',function(){
+			var value = elem.val();
+			console.log(value);
+			if(value>100)
+				elem.after('<h1>above 100</h1>');	
+			});
+			
+		}};
+		return direc;
+	});
+</script>
+<div ng-app = "myApp">
+	<div ng-controller="myController">
+		<div ng-repeat = "name in names">
+			{{name}}
+		</div>
+		<adder-part after-five="22" after-six="24">
+		</adder-part>
+		<input type="number" ng-model="name" checker max="200"/>
+	</div>
+</div>

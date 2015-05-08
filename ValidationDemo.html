@@ -1,0 +1,14 @@
+<script src = "../angular.min.js">
+</script>
+<script src="angularValidations.js">
+</script>
+<div ng-app="validationApp" >
+<form name = "myForm" novalidate>
+	<input type="text" name="pincode" ng-model="pincode" pincode>
+	
+	<span>myForm.$submitted</span>
+	<span ng-show="myForm.$submitted&&myForm.pincode.$error.validpincode" style="color:red">Please enter a valid pincode</span>
+	
+	<input type="submit" value="submit">
+
+</form>

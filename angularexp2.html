@@ -1,0 +1,57 @@
+<script src="../jquery-1.8.3.js">
+</script>
+<script src = "//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.min.js"></script>
+<script src = "//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular-animate.js"></script>
+<script>
+	var app = angular.module('myApp',['ngAnimate']);
+	var controller = app.controller('myController',function($scope){
+		$scope.ages = [10,20,15,16,33,22,11];
+		$scope.add = function(age) {
+			$scope.ages.push(age);
+		};
+		$scope.delete = function() {
+			$scope.ages.pop();
+		};
+	});
+	app.animation('.adder-box',function(){
+		return {
+			enter:function(element,done){
+				jQuery(element).css({"position":"relative","left":"-200px"});
+				jQuery(element).animate({left:"0px"});
+				return function(cancelled){
+					console.log(cancelled);
+				};
+			},
+			leave:function(element,done){
+				jQuery(element).css({"position":"relative","left":"0px"});
+				jQuery(element).animate({left:"-200px"});
+				;
+				return function(cancelled){
+					console.log(cancelled);
+				};
+			},
+			move:function(element,done){
+				jQuery(element).css({"left":"-200px"});
+				jQuery(element).animate({left:"0px"});
+				;
+				return function(cancelled){
+					console.log(cancelled);
+				};
+			}
+		}
+	});
+</script>
+<div ng-app="myApp">
+	<div ng-controller="myController">
+		<input type="text" ng-model="age">
+		<input type="text" ng-model="search">
+		<button ng-click="add(age)">add</button>
+		<button ng-click="delete()">delete</button>
+		<div style="position:absolute;left:100px;top:100px;">
+			<div class="adder-box" ng-repeat = "age in ages | filter:search" >
+				<p><a>{{age}}</a></p>
+			</div>
+		</div>
+
+	</div>
+</div>

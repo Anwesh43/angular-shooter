@@ -1,0 +1,21 @@
+<script>
+	var f1;
+	var fr;
+	window.onload = function() {
+		fr = new FileReader();
+		f1 = document.getElementById('f1');
+		f1.onchange = function(event) {
+			var files = event.target.files;
+			console.log(files[0]);
+			for(var i=0;i<files.length;i++) {
+				fr.readAsDataURL(files[0]);
+			}	
+		};
+		fr.onloadend = function(event) {
+			console.log(fr.result);
+			document.getElementById('docImage').src = fr.result;
+		};
+	};
+</script>
+<input type="file" id="f1">
+<img id="docImage">

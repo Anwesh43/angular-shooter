@@ -1,0 +1,45 @@
+<script src="../angular.min.js">
+</script>
+<script>
+	var app = angular.module('myApp',[]);
+	app.directive('drit',function($interval){
+		var dir = {};
+		dir.controller = 'myController';
+		dir.template = '<div></div>'
+		dir.restrict = 'AEC';
+		dir.link = function(scope,elem,attr){
+		elem.css({"position":"absolute","left":attr.x+"px","top":attr.y+"px","width":"100px","height":"100px","background-color":"green"});
+		
+		var max = parseInt(attr.x)+200;
+		var min = parseInt(attr.x);
+		var x = attr.x;
+		var l = 1;
+		scope.elements.push({max:max,l:l,elem:elem,x:x});
+		$interval(function(){
+			x= parseInt(x)+parseInt(l*10);
+			if(parseInt(x)>=max || parseInt(x)<=min)
+				l*=-1;
+			elem.css({left:x+"px"});
+		
+		},100);
+		
+	};	
+		return dir;
+	});
+	
+	var controller = app.controller('myController',function($scope,$interval){
+		$scope.elements = [];
+		
+		
+	});	
+</script>
+<div ng-app="myApp">
+	<drit x = "100" y = "100">
+	</drit>
+	<drit x = "300" y = "100">
+	</drit>
+	<drit x = "100" y = "300">
+	</drit>
+	<drit x = "300" y = "300">
+	</drit>
+</div>

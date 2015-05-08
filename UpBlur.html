@@ -1,0 +1,17 @@
+<script src="../angular.min.js">
+</script>
+<script>
+	var app = angular.module('iKnowMyApp',[]);
+	var controller = app.controller('controller1',function($scope){
+		$scope.user = {};
+	});
+</script>
+<div ng-app="iKnowMyApp">
+<div ng-controller="controller1">
+<input type="text" ng-model="user.showme">
+<input type="text" ng-model="user.hideme">
+<div ng-show="user.showme" ng-hide="user.hideme">
+	Hello Bros
+</div>
+</div>
+</div>

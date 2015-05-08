@@ -1,0 +1,17 @@
+<script src="../angular.min.js"></script>
+<script>
+	var app = angular.module('myApp',[]);
+	app.factory('employeeFactory',function() {
+		return {employees:[{name:"A1",age:22},{name:"A2",age:23},{name:"A3",age:24},{name:"A4",age:24}]};
+	});
+	app.controller('myController',function($scope,employeeFactory){
+		$scope.emps = employeeFactory.employees;
+	});
+</script>
+<div ng-app ="myApp">
+	<div ng-controller="myController">
+		<div ng-repeat="emp in emps">
+			<p>{{emp.name}}   {{emp.age}}</p>
+		</div>
+	</div>
+</div>

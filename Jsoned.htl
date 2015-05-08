@@ -1,0 +1,4 @@
+<script>
+	var data = "{name:Anwesh,age:2,id:1}";
+	var jsonData = JSON.parse(data);
+</script>

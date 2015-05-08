@@ -1,0 +1,26 @@
+<script src="../angular.min.js">
+</script>
+<script>
+	var app = angular.module('myApp',[]);
+	var controller = app.controller('myController',function($scope){
+		$scope.name = "Anwesh";
+		document.getElementById('brit').innerHTML = "Hello "+$scope.name;
+		$scope.$watch(function(){
+			return $scope.name;
+		},function(){
+			document.getElementById('brit').innerHTML ="Hello "+ $scope.name;
+		});
+		document.getElementById('changerText').onkeyup = function(){
+			var name = this.value;
+			$scope.$apply(function(){
+				$scope.name = name;
+			})	
+		}
+	});
+</script>
+<div ng-app="myApp" ng-controller="myController">
+	<input type="text" id="changerText">
+	<div id="brit">
+		Hello {{name}}
+	</div>
+</div>

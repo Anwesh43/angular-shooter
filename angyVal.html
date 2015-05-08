@@ -1,0 +1,36 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.10/angular.min.js"></script>
+<script>
+	var app = angular.module('myApp',[]);
+	var controller = app.controller('controller1',function($scope){
+		$scope.user = {};
+	});
+	app.directive('integer',function(){
+		var direc = {};
+		var int_regx = /^\d+$/;
+		direc.require = 'ngModel';
+		direc.link=function(scope,elem,attrs,ctrl){
+				ctrl.$validators.integer = function(modelValue,viewValue) {
+					if(ctrl.$isEmpty(modelValue)) {
+						return true;
+					}
+					if(int_regx.test(viewValue)) {
+						return true;
+					}
+					return false;
+
+				};
+		};
+		return direc;
+	});
+</script>
+<div ng-app= "myApp">
+<div ng-controller="controller1">
+<form name="form" novalidate>
+<input type="text" ng-model="user.age" name="userAge" integer>
+<div ng-show = "form.$submitted">
+<span ng-show="form.userAge.$error.integer" style="color:red">need a number</span>
+</div>
+<input type="submit">
+</form>
+</div>
+</div>

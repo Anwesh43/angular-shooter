@@ -1,0 +1,12 @@
+<script src="../angular.min.js">
+</script>
+<script>
+	var app = angular.module('appCompile',[]);
+	var controller = app.controller('myController',function($scope,$compile){
+		$scope.emps = [{name:"Anwesh",age:22},{name:"Bringo",age:23},{name:"Strito",age:24}];
+		var html = "<div ng-repeat='emp in emps'><p>{{emp.name}}</p><p>{{emp.age}}</p></div>";
+		angular.element("<body></body>").append($compile(angular.element(html))($scope));
+		console.log($compile(angular.element(html))($scope));
+	});
+</script>
+<body></body>

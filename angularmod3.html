@@ -1,0 +1,20 @@
+<script src="../angular.min.js">
+</script>
+<script>
+	var app = angular.module('myApp',[]);
+	app.filter('myfilter',function(){
+		return function(item) {
+			return item%3==0?item:0;
+		}
+	});
+	var controller = app.controller('myController',function($scope){
+		$scope.ages = [11,23,12,15,24,37,44,46,45];
+	});
+</script>
+<div ng-app="myApp">
+	<div ng-controller="myController">
+		<div ng-repeat="age in ages">
+			<p>{{age|myfilter}}</p>
+		</div>
+	</div>
+</div>

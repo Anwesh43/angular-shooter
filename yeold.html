@@ -1,0 +1,27 @@
+<script src="../angular.min.js">
+</script>
+<script>
+	var app = angular.module('myApp',[]);
+	app.value('gender',{quote:'He is'});
+	app.filter('yeold',['gender',function(gender){
+		function ster(item){
+			return gender.quote+" "+item+" years old";
+		}
+		ster.$stateful = true;
+		return ster;
+	}]);
+	app.controller('myController',['$scope','gender',function($scope,gender){
+		$scope.ages = [12,13,14,15,19,22];
+		$scope.gender = gender;
+	}]);
+
+</script>
+<div ng-app = "myApp">
+	<div ng-controller = "myController">
+	   <input type="text" ng-model="gender.quote">
+		<div ng-repeat="age in ages">
+			<p>{{age|yeold}}</p>
+		</div>
+
+	</div>
+</div>

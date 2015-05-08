@@ -1,0 +1,24 @@
+<script src =  "../angular.min.js">
+</script>
+<script>
+	var app = angular.module('myApp',[]);
+	var controller = app.controller('myController',function($scope,$http){
+		$http.get('emps.json').success(function(data,status,header,config){
+			$scope.employees = data;
+			$scope.predicate = 'age';
+			console.log($scope.employees);
+		});
+	
+	});
+
+</script>
+<div ng-app = "myApp">
+	<div ng-controller="myController">
+	<button ng-click="predicate='id'">id</button> <button ng-click="predicate='name'">name</button><button ng-click="predicate='age'">age</button>
+		<div ng-repeat = "emp in employees | orderBy:predicate">
+			<p>
+				{{emp.id}}     {{emp.name}}    {{emp.age}}
+			</p>
+		</div>
+	</div>
+</div>

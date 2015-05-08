@@ -1,0 +1,51 @@
+<script src="../angular.min.js">
+</script>
+<script>
+	var app = angular.module('canvifyApp',[]);
+	app.directive('canvify',function($interval){
+		var dir = {};
+
+		dir.link = function(scope,elem,attrs) {
+			var x = attrs.x || 100,y = attrs.y || 100,w = attrs.width || 100,h = attrs.height || 100,shape = attrs.shape || 'rect',color = attrs.color||'green',time = attrs.time || 100,rot = attrs.rot || 0,deg = attrs.deg || 0;
+			console.log(x+" "+shape+" "+color);
+			var canvas = document.createElement('canvas');
+			var ctx = canvas.getContext('2d');
+			canvas.width = w;
+			canvas.height = h;
+			canvas.style.border = '1px solid black';
+			canvas.style.position = 'absolute';
+			canvas.style.left = x;
+			canvas.style.top = y;
+			ctx.fillStyle = color;
+			document.body.appendChild(canvas);
+
+			$interval(function(){
+			ctx.clearRect(0,0,w,h);
+			if(shape == 'rect') {
+				ctx.save();
+				ctx.translate(w/2,h/2);
+				ctx.rotate(deg*Math.PI/180);
+				ctx.fillRect(-w/4,-h/4,w/2,h/2);
+				ctx.restore();
+				deg = parseInt(deg)+parseInt(rot);
+			}
+			if(shape == 'circle') {
+				ctx.beginPath();
+				ctx.arc(w/2,h/2,w/4,0,2*Math.PI);
+				ctx.fill();
+			}
+			
+			},time);	
+		};
+		dir.replace = true;
+		dir.restrict = 'AE';
+		return dir;
+	});
+
+</script>
+<div ng-app ="canvifyApp">
+	<canvify x = '200' y = '200' width = '200' height = '200' color='red' shape = 'rect' rot = '10' time = '100'>
+	</canvify>
+	<canvify x = '0' y = '0' width = '200' height = '200' color='yellowgreen' shape = 'rect' rot = '-10' time = '200'>
+	</canvify>
+</div>

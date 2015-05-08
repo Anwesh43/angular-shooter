@@ -1,0 +1,39 @@
+<script src="../angular.min.js">
+</script>
+<script>
+	var app = angular.module('myApp',[]);
+	app.directive('moveMe',function($interval){
+		var dir = {template:'<div><h1>{{title}}</h1></div>',controller:function($scope){console.log('coming here')},restrict:'AEC',link:function(scope,ielem,attrs){
+			scope.title = attrs.title || 'default';
+			scope.fromx = attrs.fromx || 0;
+			scope.fromy = attrs.fromy || 0;
+			scope.tox = attrs.tox || 0;
+			scope.toy = attrs.toy || 0;
+			scope.bc = attrs.bc || 'black';
+			scope.tc = attrs.tc || 'white';
+			ielem.attr('id',attrs.id);
+			ielem.css({"width":"100px","height":"100px",'position':'absolute','background-color':scope.bc,'color':scope.tc,'left':scope.fromx+'px','top':scope.fromy+'px'});
+			$interval(function(){
+				if(scope.tox>scope.fromx){
+					scope.fromx++;
+				}
+				if(scope.tox<scope.fromx) {
+					scope.fromx--;
+				}
+				if(scope.toy>scope.fromy){
+					scope.fromy++;
+				}
+				if(scope.toy<scope.fromy) {
+					scope.fromy--;
+				}
+				ielem.css({"left":scope.fromx+"px","top":scope.fromy+"px"});
+			},10);
+		}};
+		return dir;
+	});
+</script>
+<div ng-app="myApp">
+
+<move-me tox="0" toy="300" fromx="0" fromy="100" bc="yellowgreen" tc="red" title = "block1" id="b2">
+</move-me>
+</div>

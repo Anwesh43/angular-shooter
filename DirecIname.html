@@ -1,0 +1,18 @@
+<script src="../angular.min.js">
+</script>
+<script>
+	var app = angular.module('myApp',[]);
+	app.directive('myNames',function(){
+		var dir = {restrict:'AEC',controller:function($scope){
+			$scope.names = ["A1","A2","A3","A4","A5"];
+		},templateUrl:"Iname.html",link:function(scope,elem,attrs){
+			elem.css({"background-color":"yellowgreen"});
+			scope.iName = attrs.iname;	
+		}};
+		return dir;	
+	});
+</script>
+<div ng-app="myApp">
+	<my-names iname="Anames">
+	</div>
+</div>
